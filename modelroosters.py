@@ -23,7 +23,7 @@ from time import *  # sleep, strptime
 # ----[ Settings ]-------------------------------------
 
 url = input("Url: ")
-first_year = 2014  # - 2015
+first_year = 2015  # - 2016
 
 filename = input("Filename (without extension)? ") + ".ics"
 
@@ -41,7 +41,7 @@ def main():
     br.implicitly_wait(2)
     br.get(url)
     
-    for week in range(1,32):  # ???
+    for week in range(1,35):  # ???
     # week is more like the number of the a element you have to click to get to the next week.
     # weeks 14-20 are not on the calendar, but the dividers don't care, so week=14 ==> actual week=21
         try:
@@ -117,8 +117,8 @@ def text_to_date(text):
     year = first_year
     
     text = text.split('\n')
-    month = months[text[0]]
-    day = int(text[1])
+    month = months[text[1].lower()]
+    day = int(text[0])
     if month <= 8:  # under august
         year += 1
     
