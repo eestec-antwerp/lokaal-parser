@@ -29,8 +29,8 @@ room_row = 5  # M.G.010
 building = "CMI - gebouw G"
 
 # ATTENTION: only specify the first day of a month here
-start = date(2015,3,1)
-end = date(2015,8,1)
+start = date(2015,10,1)
+end = date(2016,1,1)
 
 # ----------------------------------------------------------
 
@@ -209,7 +209,7 @@ def parse_num(s):
     return int(_parse_num.sub(r"\1", s))
 
 def parse_summ(s):
-    return s[7:-3]
+    return s[7:-3].replace("\\n", "\n")
 
 def diff_months(a, b):
     return (b.year - a.year)*12 + (b.month - a.month)
