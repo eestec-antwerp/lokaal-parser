@@ -29,8 +29,8 @@ room_row = 5  # M.G.010
 building = "CMI - gebouw G"
 
 # ATTENTION: only specify the first day of a month here
-start = date(2015,10,1)
-end = date(2016,1,1)
+start = date(2016,9,1)
+end = date(2017,1,1)
 
 # ----------------------------------------------------------
 
@@ -50,7 +50,7 @@ def main():
     cal.add('version', '2.0')
     
     # login prompt
-    br = webdriver.Firefox()
+    br = webdriver.Chrome()
     br.implicitly_wait(2)  # ...
     br.get("https://www.ua.ac.be/login/login.aspx?url=www.ua.ac.be&c=.LOKAALRESERVATIE&n=36899")
     br.find_element_by_id("TextBox1").send_keys(user)
@@ -65,6 +65,7 @@ def main():
     # navigate to first month
     current_first = first_day(br)
     while current_first != start:
+        print("current_first", current_first, "start", start)
         if current_first < start:
             next_month(br)
         else:
@@ -176,7 +177,7 @@ def first_day(br):
     for row in range(3,9):
         for col in range(1,8):
             el = br.find_element_by_xpath('//*[@id="ctl18_Calendar1"]/tbody/tr[{0}]/td[{1}]/a'.format(row, col))
-            if "DarkGray" not in el.get_attribute("style"):
+            if "darkgray" not in el.get_attribute("style"):
                 return num_to_date(parse_num(el.get_attribute("href")))
 
     
@@ -186,7 +187,7 @@ def get_days(br):
     for row in range(3,9):
         for col in range(1,8):
             el = br.find_element_by_xpath('//*[@id="ctl18_Calendar1"]/tbody/tr[{0}]/td[{1}]/a'.format(row, col))
-            if "DarkGray" not in el.get_attribute("style"):
+            if "darkgray" not in el.get_attribute("style"):
                 num = parse_num(el.get_attribute("href"))
                 date = num_to_date(num)
                 days[date] = el

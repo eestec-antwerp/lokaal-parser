@@ -23,7 +23,7 @@ from time import *  # sleep, strptime
 # ----[ Settings ]-------------------------------------
 
 url = input("Url: ")
-first_year = 2015  # - 2016
+first_year = 2016  # - 2017
 
 filename = input("Filename (without extension)? ") + ".ics"
 
@@ -37,9 +37,10 @@ def main():
     cal.add('version', '2.0')
     
     # init webdriver
-    br = webdriver.Firefox()
+    br = webdriver.Chrome()
     br.implicitly_wait(2)
     br.get(url)
+    print("got url")
     
     for week in range(1,35):  # ???
     # week is more like the number of the a element you have to click to get to the next week.
